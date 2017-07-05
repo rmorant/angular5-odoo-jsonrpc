@@ -1,12 +1,10 @@
-# angular2-odoorpc
+# angular4-odoorpc
 OdooRPC for angular 4
 
-Migrate from [https://github.com/akretion/angular-odoo/blob/master/src/components/odoo/jsonRpc-service.js](https://github.com/akretion/angular-odoo/blob/master/src/components/odoo/jsonRpc-service.js)
-+ Support Basic Authentication
 
 ## Installation
 
-`npm install --save angular2-odoo-jsonrpc`
+`npm install --save angular4-odoo-jsonrpc`
 
 ## Functions list
 
