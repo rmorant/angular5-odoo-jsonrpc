@@ -218,11 +218,11 @@ var OdooRPCService = (function () {
         };
         return this.sendRequest("/web/dataset/call_kw", params);
     };
+    OdooRPCService = __decorate([
+        Injectable(),
+        __param(0, Inject(Http)),
+        __metadata("design:paramtypes", [Http])
+    ], OdooRPCService);
     return OdooRPCService;
 }());
-OdooRPCService = __decorate([
-    Injectable(),
-    __param(0, Inject(Http)),
-    __metadata("design:paramtypes", [Http])
-], OdooRPCService);
 export { OdooRPCService };

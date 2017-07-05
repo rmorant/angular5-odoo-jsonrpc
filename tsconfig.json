@@ -1,12 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true, 
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "module": "es2015",
+    "moduleResolution": "node",
     "target": "es5",
-    "noImplicitAny": false,
     "sourceMap": false,
-    "experimentalDecorators": true
+    "noImplicitAny": false
   },
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+      "src/**/*.ts"
   ]
 }

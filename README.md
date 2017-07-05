@@ -1,5 +1,5 @@
 # angular2-odoorpc
-OdooRPC for angular2
+OdooRPC for angular 4
 
 Migrate from [https://github.com/akretion/angular-odoo/blob/master/src/components/odoo/jsonRpc-service.js](https://github.com/akretion/angular-odoo/blob/master/src/components/odoo/jsonRpc-service.js)
 + Support Basic Authentication
