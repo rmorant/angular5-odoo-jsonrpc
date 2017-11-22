@@ -60,7 +60,6 @@ export class OdooRPCService {
     }
 
     private handleOdooErrors(response: any) {
-        response = response.json();
         if (!response.error) {
             return response.result;
         }
@@ -122,8 +121,8 @@ export class OdooRPCService {
     }
 
     public sendRequest(url: string, params: Object): Promise<any> {
-        let options = this.buildRequest(url, params);
-        return this.http.post(this.odoo_server + url, options, {headers: this.headers})
+        let body = this.buildRequest(url, params);
+        return this.http.post(this.odoo_server + url, body, {headers: this.headers})
             .toPromise()
             .then(this.handleOdooErrors)
             .catch(this.handleHttpErrors);
