@@ -58,7 +58,6 @@ var OdooRPCService = /** @class */ (function () {
         });
     };
     OdooRPCService.prototype.handleOdooErrors = function (response) {
-        response = response.json();
         if (!response.error) {
             return response.result;
         }
@@ -117,8 +116,8 @@ var OdooRPCService = /** @class */ (function () {
         this.http_auth = http_auth;
     };
     OdooRPCService.prototype.sendRequest = function (url, params) {
-        var options = this.buildRequest(url, params);
-        return this.http.post(this.odoo_server + url, options, { headers: this.headers })
+        var body = this.buildRequest(url, params);
+        return this.http.post(this.odoo_server + url, body, { headers: this.headers })
             .toPromise()
             .then(this.handleOdooErrors)["catch"](this.handleHttpErrors);
     };
