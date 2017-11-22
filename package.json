@@ -1,6 +1,6 @@
 {
   "name": "angular5-odoo-jsonrpc",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Odoo JsonRPC Service for Angular 5",
   "main": "odoorpc.service.js",
   "scripts": {
