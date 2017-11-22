@@ -1,19 +1,18 @@
+"use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Injectable, Inject } from "@angular/core";
-import { Http, Headers } from "@angular/http";
-import "rxjs/add/operator/toPromise";
-var Cookies = (function () {
+exports.__esModule = true;
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/common/http");
+require("rxjs/add/operator/toPromise");
+var Cookies = /** @class */ (function () {
     function Cookies() {
         this.session_id = null;
     }
@@ -34,7 +33,7 @@ var Cookies = (function () {
     };
     return Cookies;
 }());
-var OdooRPCService = (function () {
+var OdooRPCService = /** @class */ (function () {
     function OdooRPCService(http) {
         this.http = http;
         this.uniq_id_counter = 0;
@@ -47,12 +46,7 @@ var OdooRPCService = (function () {
         if (this.shouldManageSessionId) {
             params.session_id = this.cookies.get_sessionId();
         }
-        var json_data = {
-            jsonrpc: "2.0",
-            method: "call",
-            params: params,
-        };
-        this.headers = new Headers({
+        this.headers = new http_1.HttpHeaders({
             "Content-Type": "application/json",
             "X-Openerp-Session-Id": this.cookies.get_sessionId(),
             "Authorization": "Basic " + btoa("" + this.http_auth)
@@ -60,7 +54,7 @@ var OdooRPCService = (function () {
         return JSON.stringify({
             jsonrpc: "2.0",
             method: "call",
-            params: params,
+            params: params
         });
     };
     OdooRPCService.prototype.handleOdooErrors = function (response) {
@@ -78,7 +72,7 @@ var OdooRPCService = (function () {
             errorObj.title = "page_not_found";
             errorObj.message = "HTTP Error";
         }
-        else if ((error.code === 100 && error.message === "Odoo Session Expired") ||
+        else if ((error.code === 100 && error.message === "Odoo Session Expired") || // v8
             (error.code === 300 && error.message === "OpenERP WebClient Error" && error.data.debug.match("SessionExpiredException")) // v7
         ) {
             errorObj.title = "session_expired";
@@ -126,8 +120,7 @@ var OdooRPCService = (function () {
         var options = this.buildRequest(url, params);
         return this.http.post(this.odoo_server + url, options, { headers: this.headers })
             .toPromise()
-            .then(this.handleOdooErrors)
-            .catch(this.handleHttpErrors);
+            .then(this.handleOdooErrors)["catch"](this.handleHttpErrors);
     };
     OdooRPCService.prototype.getServerInfo = function () {
         return this.sendRequest("/web/webclient/version_info", {});
@@ -200,8 +193,7 @@ var OdooRPCService = (function () {
         localStorage.setItem("user_context", JSON.stringify(context));
         var args = [[this.context.uid], context];
         this.call("res.users", "write", args, {})
-            .then(function () { return _this.context = context; })
-            .catch(function (err) { return _this.context = context; });
+            .then(function () { return _this.context = context; })["catch"](function (err) { return _this.context = context; });
     };
     OdooRPCService.prototype.getContext = function () {
         return this.context;
@@ -214,15 +206,14 @@ var OdooRPCService = (function () {
             model: model,
             method: method,
             args: args,
-            kwargs: kwargs,
+            kwargs: kwargs
         };
         return this.sendRequest("/web/dataset/call_kw", params);
     };
     OdooRPCService = __decorate([
-        Injectable(),
-        __param(0, Inject(Http)),
-        __metadata("design:paramtypes", [Http])
+        core_1.Injectable(),
+        __param(0, core_1.Inject(http_1.HttpClient))
     ], OdooRPCService);
     return OdooRPCService;
 }());
-export { OdooRPCService };
+exports.OdooRPCService = OdooRPCService;

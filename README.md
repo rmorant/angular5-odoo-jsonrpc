@@ -1,10 +1,10 @@
-# angular4-odoorpc
-OdooRPC for angular 4
+# angular5-odoorpc
+OdooRPC for angular 5
 
 
 ## Installation
 
-`npm install --save angular4-odoo-jsonrpc`
+`npm install --save angular5-odoo-jsonrpc`
 
 ## Functions list
 
@@ -21,7 +21,7 @@ Import `OdooRPCService` into component
 
 ```typescript
 import { Component } from '@angular/core';
-import { OdooRPCService } from 'angular2-odoo-jsonrpc';
+import { OdooRPCService } from 'angular5-odoo-jsonrpc';
 ```
 
 Add provider in app component

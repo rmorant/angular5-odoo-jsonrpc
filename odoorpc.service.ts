@@ -1,6 +1,5 @@
 import { Injectable, Inject } from "@angular/core"
-import { Http, Response, Headers } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 import "rxjs/add/operator/toPromise";
 
@@ -35,10 +34,10 @@ export class OdooRPCService {
     private uniq_id_counter: number = 0;
     private shouldManageSessionId: boolean = false; // try without first
     private context: Object = JSON.parse(localStorage.getItem("user_context")) || {"lang": "en_US"};
-    private headers: Headers;
+    private headers: HttpHeaders;
 
     constructor(
-        @Inject(Http) private http: Http) {
+        @Inject(HttpClient) private http: HttpClient) {
         this.cookies = new Cookies();
     }
 
@@ -48,12 +47,7 @@ export class OdooRPCService {
             params.session_id = this.cookies.get_sessionId();
         }
 
-        let json_data = {
-            jsonrpc: "2.0",
-            method: "call",
-            params: params, // payload
-        };
-        this.headers = new Headers({
+        this.headers = new HttpHeaders({
             "Content-Type": "application/json",
             "X-Openerp-Session-Id": this.cookies.get_sessionId(),
             "Authorization": "Basic " + btoa(`${this.http_auth}`)
@@ -219,7 +213,7 @@ export class OdooRPCService {
 
         kwargs = kwargs || {};
         kwargs.context = kwargs.context || {};
-        Object.assign(kwargs.context, this.context);
+        (<any>Object).assign(kwargs.context, this.context);
 
         let params = {
             model: model,
