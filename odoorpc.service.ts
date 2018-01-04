@@ -30,9 +30,9 @@ class Cookies { // cookies doesn't work with Android default browser / Ionic
 export class OdooRPCService {
     private odoo_server: string;
     private http_auth: string;
-    private cookies: Cookies;
+    protected cookies: Cookies;
     private uniq_id_counter: number = 0;
-    private shouldManageSessionId: boolean = false; // try without first
+    public shouldManageSessionId: boolean = false; // try without first
     private context: Object = JSON.parse(localStorage.getItem("user_context")) || {"lang": "en_US"};
     private headers: HttpHeaders;
 
