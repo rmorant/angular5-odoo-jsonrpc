@@ -222,4 +222,13 @@ export class OdooRPCService {
         };
         return this.sendRequest("/web/dataset/call_kw", params);
     }
+
+  // v.1.0.8
+  public set_sessionId(session_id:string) : void {
+    this.cookies.set_sessionId(session_id);
+  }
+
+  public get_sessionId() : string {
+    return this.cookies.get_sessionId();
+  }
 }

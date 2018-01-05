@@ -212,6 +212,13 @@ var OdooRPCService = /** @class */ (function () {
         };
         return this.sendRequest("/web/dataset/call_kw", params);
     };
+    // v.1.0.8
+    OdooRPCService.prototype.set_sessionId = function (session_id) {
+        this.cookies.set_sessionId(session_id);
+    };
+    OdooRPCService.prototype.get_sessionId = function () {
+        return this.cookies.get_sessionId();
+    };
     OdooRPCService = __decorate([
         Injectable(),
         __param(0, Inject(HttpClient)),
